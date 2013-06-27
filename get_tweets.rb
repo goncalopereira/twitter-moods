@@ -10,9 +10,7 @@ require 'uri'
 
 require './keys'
 
-puts @token_key
-
-url = 'https://api.twitter.com'
+url = 'http://api.twitter.com'
 uri = URI.parse(url)
 
 consumer = OAuth::Consumer.new(@consumer_key,@consumer_secret, {
