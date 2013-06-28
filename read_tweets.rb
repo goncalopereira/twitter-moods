@@ -68,8 +68,6 @@ filtered_list.each do |status|
 	end	
 end
 
-filtered_list
-
 filtered_list.sort! { |x,y| y["mood"] <=> x["mood"] } 
 
 filtered_list.each do |status|
