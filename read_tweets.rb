@@ -39,14 +39,16 @@ filtered_list = add_word_list_entries filtered_list
 filtered_list = remove_short_words filtered_list
 
 #hashtags
-filtered_list = remove_words_starting_with '#', filtered_list 
+remove_words_starting_with '#', filtered_list 
 #urls
-filtered_list = remove_words_starting_with 'http', filtered_list 
+remove_words_starting_with 'http', filtered_list 
+#accounts
+remove_words_starting_with '@', filtered_list
 
 i=0
 filtered_list.each do |status|
 	i+=1
-	puts "#{i}, #{status["created_at"]}, #{status["lang"]}, #{status["user"]["name"]}, #{status["retweet_count"]}, #{status["text"]}"
+	puts "#{i}, #{status["created_at"]}, #{status["lang"]}, #{status["user"]["name"]}, #{status["retweet_count"]}"
 	status["words"].each do |word|
 		puts word
 	end
