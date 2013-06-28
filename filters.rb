@@ -2,7 +2,6 @@ def remove_accounts_named name, list
         list.delete_if do |status|
                  status['user']['name'].include? name
         end
-        list
 end
 
 def add_word_list_entries list
