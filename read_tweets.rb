@@ -34,9 +34,19 @@ def remove_short_words list
 	end
 end
 
-filtered_list = remove_accounts_named '7digital', filtered_list
-filtered_list = add_word_list_entries filtered_list
-filtered_list = remove_short_words filtered_list
+def remove_chars_from_words chars, list
+	list.each do |status|
+		status["words"].map! do |word|
+			word.delete(chars)
+		end
+	end
+end
+
+remove_accounts_named '7digital', filtered_list
+
+add_word_list_entries filtered_list
+
+remove_short_words filtered_list
 
 #hashtags
 remove_words_starting_with '#', filtered_list 
@@ -44,6 +54,12 @@ remove_words_starting_with '#', filtered_list
 remove_words_starting_with 'http', filtered_list 
 #accounts
 remove_words_starting_with '@', filtered_list
+
+remove_chars_from_words ',', filtered_list
+remove_chars_from_words '-', filtered_list
+remove_chars_from_words ':', filtered_list
+remove_chars_from_words '"', filtered_list
+remove_chars_from_words '\'s', filtered_list
 
 i=0
 filtered_list.each do |status|
