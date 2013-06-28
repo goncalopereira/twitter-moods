@@ -18,11 +18,8 @@ remove_words_starting_with 'http', filtered_list
 #accounts
 remove_words_starting_with '@', filtered_list
 
-remove_chars_from_words ',', filtered_list
-remove_chars_from_words '-', filtered_list
-remove_chars_from_words ':', filtered_list
-remove_chars_from_words '"', filtered_list
 remove_chars_from_words '\'s', filtered_list
+remove_non_alphanumeric filtered_list
 
 moods = Hash.new
 
@@ -35,7 +32,7 @@ i=0
 filtered_list.each do |status|
 	i+=1
 	status["words"].each do |word|
-		puts "-#{status["retweet_count"]}, #{word}, #{moods[word]}"
+		puts "#{status["retweet_count"]}, #{word}, #{moods[word]}"
 	end
 end
 

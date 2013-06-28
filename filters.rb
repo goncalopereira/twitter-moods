@@ -36,4 +36,11 @@ def remove_chars_from_words chars, list
         end
 end
 
+def remove_non_alphanumeric list
+	list.each do |status|
+		status["words"].map! do |word|
+			word.gsub(/[^0-9a-z]/i,'')
+		end
+	end
+end
 
