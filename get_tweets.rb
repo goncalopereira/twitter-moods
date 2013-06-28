@@ -2,6 +2,7 @@ require 'rubygems'
 require 'oauth'
 require 'net/http'
 require 'uri'
+require 'json'
 
 @consumer_key = ''
 @consumer_secret = ''
@@ -21,7 +22,11 @@ token = OAuth::Token.new(@token_key,@token_secret)
 
 path = '/1.1/search/tweets.json'
 
-querystring = '?q=7digital'
+searchTerms="7digital"
+
+querystring = "?q="+URI.encode(searchTerms)+"&count=100&lang=en"
+
+puts querystring
 
 request = consumer.create_signed_request(:get,path+querystring, token)
 
@@ -29,4 +34,15 @@ http = Net::HTTP.new(uri.host, uri.port)
 
 response = http.request(request)
 
-puts response.body
+File.open('results', 'w') { |file| file.write(response.body) }
+
+
+
+#parsed_response_body = JSON.parse(response.body)
+
+#i=0
+#parsed_response_body['statuses'].each do |status|
+#	i+=1
+#	puts "#{i}, #{status["created_at"]}, #{status["lang"]}, #{status["user"]["name"]}, #{status["retweet_count"]}, #{status["text"]}"
+#end
+
