@@ -28,16 +28,17 @@ File.open('moods').each do |line|
 	moods[fields[0]] = fields[1]
 end
 
-i=0
+#add mood to tweet
 filtered_list.each do |status|
-	i+=1
 	status["words"].each do |word|
 		total = (moods[word].to_i||0) * (status["retweet_count"].to_i+1) #include original
 		status["mood"] = (status["mood"]||0) + total
-
-	end
-	
-	puts "#{status["mood"]}, #{status["text"]}"
+	end	
 end
 
+filtered_list.sort! { |x,y| y["mood"] <=> x["mood"] } 
+
+filtered_list.each do |status|
+	puts "#{status["user"]["name"]}, #{status["mood"]}, #{status["text"]}"
+end
 
