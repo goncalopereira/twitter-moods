@@ -7,7 +7,7 @@ end
 
 def add_word_list_entries list
         list.each do |status|
-                words = status["text"].split( )
+                words = status["text"].downcase.split()
                 status["words"] = words
         end
 end
