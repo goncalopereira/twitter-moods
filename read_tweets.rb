@@ -35,7 +35,7 @@ def read_from_csv filename
 	tweets_json
 end	
 
-def run_twitter_moods filtered_list
+def run_twitter_moods filtered_list, filename
 	remove_accounts_named '7digital', filtered_list
 
 	add_word_list_entries filtered_list
@@ -59,13 +59,38 @@ def run_twitter_moods filtered_list
 		moods[fields[0]] = fields[1]
 	end
 
-#add mood to tweet
+mood_data = []
+#add mood and position to tweet
+	i=0
 	filtered_list.each do |status|
 		status["words"].each do |word|
 			total = (moods[word].to_i||0) * (status["retweet_count"].to_i+1) #include original
 			status["mood"] = (status["mood"]||0) + total
+			status["position"] = i
+			i+=1
 		end	
+
+		mood_data << status["mood"]
 	end
+	
+	
+
+	require 'rubyvis'
+	vis = Rubyvis::Panel.new do 
+		width 1500
+		height 1500
+		bar do
+			data mood_data
+			width 20
+			height {|d| d * 80}
+			bottom(0)
+			left {index * 25}
+		 end
+	end
+	
+	vis.render()
+	
+	File.open(filename + ".svg", 'w') { |file| file.write(vis.to_svg) }
 
 	filtered_list.sort! { |x,y| y["mood"] <=> x["mood"] } 
 

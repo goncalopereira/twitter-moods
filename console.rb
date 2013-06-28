@@ -10,5 +10,5 @@ if ARGV[0] == 'csv'
 	filtered_list = read_from_csv ARGV[1]
 end
 
-run_twitter_moods filtered_list
+run_twitter_moods filtered_list, ARGV[1]
 
