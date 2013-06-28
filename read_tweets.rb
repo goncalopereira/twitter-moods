@@ -1,4 +1,5 @@
 require 'json'
+require 'csv'
 require './filters'
 
 def read_from_json filename
@@ -6,6 +7,33 @@ def read_from_json filename
 	parsed_response_body = JSON.parse(results)
 	parsed_response_body['statuses']
 end
+
+def read_from_csv filename
+	results = []
+	File.open(filename).each do |line|
+		if line.start_with? '<'
+			results << line
+		end
+	end
+
+	tweets_json = []
+
+	results.each do |line|
+		
+		fields = line.split()
+				
+
+		fake_tweet = Hash.new
+		fake_tweet["user"] = Hash.new
+		fake_tweet["user"]["name"] = fields[0]
+
+		fake_tweet["text"] = line
+		
+		tweets_json << fake_tweet				
+	end
+
+	tweets_json
+end	
 
 filtered_list = read_from_json 'results'
 
