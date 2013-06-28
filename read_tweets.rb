@@ -24,12 +24,18 @@ remove_chars_from_words ':', filtered_list
 remove_chars_from_words '"', filtered_list
 remove_chars_from_words '\'s', filtered_list
 
+moods = Hash.new
+
+File.open('moods').each do |line|
+	fields = line.split()
+	moods[fields[0]] = fields[1]
+end
+
 i=0
 filtered_list.each do |status|
 	i+=1
-	puts "#{i}, #{status["created_at"]}, #{status["lang"]}, #{status["user"]["name"]}, #{status["retweet_count"]}"
 	status["words"].each do |word|
-		puts word
+		puts "-#{status["retweet_count"]}, #{word}, #{moods[word]}"
 	end
 end
 
