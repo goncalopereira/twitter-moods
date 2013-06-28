@@ -32,8 +32,12 @@ i=0
 filtered_list.each do |status|
 	i+=1
 	status["words"].each do |word|
-		puts "#{status["retweet_count"]}, #{word}, #{moods[word]}"
+		total = (moods[word].to_i||0) * (status["retweet_count"].to_i+1) #include original
+		status["mood"] = (status["mood"]||0) + total
+
 	end
+	
+	puts "#{status["mood"]}, #{status["text"]}"
 end
 
 
