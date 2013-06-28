@@ -1,9 +1,13 @@
 require 'json'
 require './filters'
 
-results = File.read('results')
-parsed_response_body = JSON.parse(results)
-filtered_list = parsed_response_body['statuses']
+def read_from_json filename
+	results = File.read(filename)
+	parsed_response_body = JSON.parse(results)
+	parsed_response_body['statuses']
+end
+
+filtered_list = read_from_json 'results'
 
 remove_accounts_named '7digital', filtered_list
 
@@ -35,6 +39,8 @@ filtered_list.each do |status|
 		status["mood"] = (status["mood"]||0) + total
 	end	
 end
+
+filtered_list
 
 filtered_list.sort! { |x,y| y["mood"] <=> x["mood"] } 
 
