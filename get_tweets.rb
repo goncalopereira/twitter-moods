@@ -36,13 +36,3 @@ response = http.request(request)
 
 File.open('results', 'w') { |file| file.write(response.body) }
 
-
-
-#parsed_response_body = JSON.parse(response.body)
-
-#i=0
-#parsed_response_body['statuses'].each do |status|
-#	i+=1
-#	puts "#{i}, #{status["created_at"]}, #{status["lang"]}, #{status["user"]["name"]}, #{status["retweet_count"]}, #{status["text"]}"
-#end
-
