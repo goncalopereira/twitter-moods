@@ -4,10 +4,15 @@ require './filters'
 require './io'
 
 def run_twitter_moods filtered_list, filename
+
+	moods = add_values_to_hash 'moods'
+        moods = add_values_to_hash 'emoticons', moods
+        slang = add_values_to_hash 'slang', nil, '-'
+
 	remove_accounts_named '7digital', filtered_list
 
-	add_word_list_entries filtered_list
-
+	add_word_list_entries filtered_list, slang
+	
 	remove_short_words filtered_list
 #hashtags
 	remove_words_starting_with '#', filtered_list 
@@ -17,9 +22,6 @@ def run_twitter_moods filtered_list, filename
 	remove_words_starting_with '@', filtered_list
 	remove_chars_from_words '\'s', filtered_list
 
-	moods = add_values_to_hash 'moods'
-	moods = add_values_to_hash 'emoticons', moods
-	
 	mood_data = []
 	#add mood and position to tweet
 	i=0
