@@ -15,11 +15,11 @@ def run_twitter_moods filtered_list, filename
 	
 	remove_short_words filtered_list
 #hashtags
-	remove_words_starting_with '#', filtered_list 
+	#remove_words_starting_with '#', filtered_list 
 #urls
-	remove_words_starting_with 'http', filtered_list 
+#	remove_words_starting_with 'http', filtered_list 
 #accounts
-	remove_words_starting_with '@', filtered_list
+#	remove_words_starting_with '@', filtered_list
 	remove_chars_from_words '\'s', filtered_list
 
 	mood_data = []
