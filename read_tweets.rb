@@ -72,25 +72,6 @@ mood_data = []
 
 		mood_data << status["mood"]
 	end
-	
-	
-
-	require 'rubyvis'
-	vis = Rubyvis::Panel.new do 
-		width 1500
-		height 1500
-		bar do
-			data mood_data
-			width 20
-			height {|d| d * 80}
-			bottom(0)
-			left {index * 25}
-		 end
-	end
-	
-	vis.render()
-	
-	File.open(filename + ".svg", 'w') { |file| file.write(vis.to_svg) }
 
 	filtered_list.sort! { |x,y| y["mood"] <=> x["mood"] } 
 
