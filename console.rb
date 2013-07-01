@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require './read_tweets'
 
 filtered_list = []
