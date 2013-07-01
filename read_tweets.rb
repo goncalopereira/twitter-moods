@@ -44,10 +44,11 @@ def run_twitter_moods filtered_list, filename
 		if current_position >= 4
 			moving_average = (filtered_list[current_position]["mood"]+filtered_list[current_position-1]["mood"]+filtered_list[current_position-2]["mood"]+filtered_list[current_position-3]["mood"]+filtered_list[current_position-4]["mood"])/5
 
-			puts moving_average
-		end
-	
-			
+			if moving_average.abs >= 2
+				puts current_position
+				puts write_line filtered_list[current_position]
+			end
+		end		
 	end	
 	
 	#write results

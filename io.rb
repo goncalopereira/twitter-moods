@@ -41,10 +41,14 @@ def read_moods
 	moods
 end
 
+def write_line status
+	"#{status["user"]["name"]}, #{status["mood"]}, #{status["text"]}"
+end
+
 def write_results filename, tweets
         File.open(filename, 'w') do |file|
                 tweets.each do |status|
-                    file.puts "#{status["user"]["name"]}, #{status["mood"]}, #{status["text"]}"
+                    file.puts write_line status
                 end
         end
 end
