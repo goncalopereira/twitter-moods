@@ -31,7 +31,7 @@ def read_from_csv filename
         tweets_json
 end
 
-def add_moods filename, current_list_of_moods=nil, separator=' '
+def add_values_to_hash filename, current_list_of_moods=nil, separator=' '
         moods = current_list_of_moods || Hash.new
 
         File.open(filename).each do |line|

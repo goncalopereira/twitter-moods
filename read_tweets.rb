@@ -17,9 +17,9 @@ def run_twitter_moods filtered_list, filename
 	remove_words_starting_with '@', filtered_list
 	remove_chars_from_words '\'s', filtered_list
 
-	moods = add_moods 'moods'
-	moods = add_moods 'emoticons', moods
-
+	moods = add_values_to_hash 'moods'
+	moods = add_values_to_hash 'emoticons', moods
+	
 	mood_data = []
 	#add mood and position to tweet
 	i=0
