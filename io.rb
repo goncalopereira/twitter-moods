@@ -31,6 +31,16 @@ def read_from_csv filename
         tweets_json
 end
 
+def read_moods
+        moods = Hash.new
+
+        File.open('moods').each do |line|
+                fields = line.split()
+                moods[fields[0]] = fields[1]
+        end
+	moods
+end
+
 def write_results filename, tweets
         File.open(filename, 'w') do |file|
                 tweets.each do |status|

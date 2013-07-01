@@ -20,15 +20,10 @@ def run_twitter_moods filtered_list, filename
 	remove_chars_from_words '\'s', filtered_list
 	remove_non_alphanumeric filtered_list
 
-	moods = Hash.new
+	moods = read_moods
 
-	File.open('moods').each do |line|
-		fields = line.split()
-		moods[fields[0]] = fields[1]
-	end
-
-mood_data = []
-#add mood and position to tweet
+	mood_data = []
+	#add mood and position to tweet
 	i=0
 	filtered_list.each do |status|
 		status["words"].each do |word|
