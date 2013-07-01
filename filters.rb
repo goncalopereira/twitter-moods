@@ -4,10 +4,20 @@ def remove_accounts_named name, list
         end
 end
 
-def add_word_list_entries list
+def add_word_list_entries list, slang_list
         list.each do |status|
+		status["words"] = []		
+
                 words = status["text"].downcase.split()
-                status["words"] = words
+
+		words.each do |word|
+			if slang_list.has_key? word
+				puts word + "-" + slang_list[word]
+				status["words"] << slang_list[word].split()
+			else
+				status["words"] << word	
+			end
+		end
         end
 end
 
