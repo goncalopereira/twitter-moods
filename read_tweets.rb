@@ -18,7 +18,7 @@ def run_twitter_moods filtered_list, filename
 	remove_chars_from_words '\'s', filtered_list
 	remove_non_alphanumeric filtered_list
 
-	moods = read_moods
+	moods = add_moods 'moods'
 
 	mood_data = []
 	#add mood and position to tweet

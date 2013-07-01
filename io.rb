@@ -31,11 +31,11 @@ def read_from_csv filename
         tweets_json
 end
 
-def read_moods
-        moods = Hash.new
+def add_moods filename, current_list_of_moods=nil
+        moods = current_list_of_moods || Hash.new
 
-        File.open('moods').each do |line|
-                fields = line.split()
+        File.open(filename).each do |line|
+                fields = line.split()		
                 moods[fields[0]] = fields[1]
         end
 	moods
