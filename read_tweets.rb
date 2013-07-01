@@ -35,6 +35,14 @@ def read_from_csv filename
 	tweets_json
 end	
 
+def write_results filename, tweets		
+        File.open(filename, 'w') do |file| 
+               	tweets.each do |status|
+                    file.puts "#{status["user"]["name"]}, #{status["mood"]}, #{status["text"]}"
+                end
+        end
+end
+
 def run_twitter_moods filtered_list, filename
 	remove_accounts_named '7digital', filtered_list
 
@@ -72,12 +80,12 @@ mood_data = []
 
 		mood_data << status["mood"]
 	end
+	
+	write_results filename+"_unsorted_results", filtered_list	
 
 	filtered_list.sort! { |x,y| y["mood"] <=> x["mood"] } 
 
-	filtered_list.each do |status|
-		puts "#{status["user"]["name"]}, #{status["mood"]}, #{status["text"]}"
-	end
+	write_results filename+"_sorted_results", filtered_list
 end
 
 
